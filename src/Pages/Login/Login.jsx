@@ -1,7 +1,37 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Providers/Authpovider';
+import Swal from 'sweetalert2';
 
 const Login = () => {
+
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location ?.state ?.from ?.pathname || '/';
+    const { signIn } = useContext(AuthContext);
+
+    const handleLogin = (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                 Swal.fire({
+                    position: 'middle',
+                    icon: 'success',
+                    title: 'Login Success',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                navigate(from,{replace:true})
+            })
+            .catch(error => console.log(error))
+    }
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -9,7 +39,7 @@ const Login = () => {
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <div className="card-body">
                         <h2 className='text-2xl text-center'>Please Login</h2>
-                        <form >
+                        <form onSubmit={handleLogin}>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
@@ -29,7 +59,7 @@ const Login = () => {
                                 <input className='btn btn-primary' type="submit" value="Login" />
                             </div>
                         </form>
-                        <p className='mt-3'>New To Baby Mart?<Link to='/signup'> Please Sign Up</Link></p>
+                        <p className='mt-3'>New To YoungStar?<Link to='/signup'> <span className='text-blue-700'>Please Sign Up</span></Link></p>
 
                     </div>
                 </div>

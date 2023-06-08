@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Providers/Authpovider';
 
 const Navbar = () => {
+
+
+  const { user, logOut } = useContext(AuthContext)
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => { })
+      .catch(error => console.log(error))
+  }
+
   const navOptions = <>
     <li><Link to='/'>Home</Link></li>
     <li><Link to='/instructors'>Instructors</Link></li>
@@ -18,10 +29,9 @@ const Navbar = () => {
             {navOptions}
           </ul>
         </div>
-
-       <Link to='/'>
-       <a className="btn btn-ghost normal-case text-xl">Bistro Boss</a>
-       </Link>
+        <Link to='/'>
+          <a className="btn btn-ghost normal-case text-xl">YoungStar Sports</a>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -29,15 +39,23 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end ">
-     <ul className="menu menu-horizontal px-1">
-     <li><Link to='/dashboard '>Dashboard </Link></li>
-    <li><Link to='/login'>Login</Link></li>
-     </ul>
-     <div className="avatar">
-  <div className="w-10 rounded-full ring ring-slate-700 ">
-    <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-  </div>
-</div>
+        {user ? <div className='flex'>
+          <ul className='flex me-4'>
+            <li><Link to='/dashboard ' className="m-3 mt-2 " >Dashboard </Link></li>
+            <Link onClick={handleLogOut} to='/login' className="m-3 " >Log Out</Link>
+          </ul>
+          <div className="avatar">
+            <div className="w-10 rounded-full ring ring-slate-700 ">
+              <img src={user?.displayName} />
+            </div>
+          </div>
+        </div>
+
+          : <Link to='/login' className="m-3 " >Login</Link>
+        }
+
+
+
       </div>
     </div>
   );

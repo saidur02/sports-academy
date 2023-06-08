@@ -4,7 +4,10 @@ import {
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
-import SignUp from "../SignUp/SignUp";
+import SignUp from "../Pages/SignUp/SignUp";
+import PrivateRoutes from "./PrivateRoutes";
+import Classes from "../Pages/Classes/Classes";
+
 
 
 
@@ -20,12 +23,16 @@ import SignUp from "../SignUp/SignUp";
             element:<Home></Home>
         },
         {
-            path:'/login',
+            path:'login',
             element:<Login></Login>
         },
         {
-            path:'/signup',
+            path:'signup',
             element:<SignUp></SignUp>
+        },
+        {
+            path:'classes',
+            element:<PrivateRoutes><Classes></Classes></PrivateRoutes>
         }
       ]
     },
