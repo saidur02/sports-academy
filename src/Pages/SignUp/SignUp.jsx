@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/Authpovider';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
@@ -7,12 +7,14 @@ import Swal from 'sweetalert2';
 
 const SignUp = () => {
     const {createUser} = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    const navigate = useNavigate()
 
     const onSubmit = data => {
         createUser(data.email,data.password)
         .then(result =>{
                     const loggedUser = result.user;
+                    reset()
                     Swal.fire({
                         position: 'middle',
                         icon: 'success',
@@ -20,6 +22,7 @@ const SignUp = () => {
                         showConfirmButton: false,
                         timer: 1500
                     })
+                    navigate('/login')
                 })
        
     };
