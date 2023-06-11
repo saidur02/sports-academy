@@ -14,7 +14,6 @@ const Instructor = () => {
                 setUser(data)
                 console.log(data)
             })
-
     }, [])
 
     return (
