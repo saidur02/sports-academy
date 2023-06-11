@@ -10,7 +10,6 @@ const Dashboard = () => {
 
     const [isAdmin] = useAdmin()
 
-
     return (
         <div className="drawer bg-slate-300 lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
