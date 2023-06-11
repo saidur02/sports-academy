@@ -3,30 +3,49 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/Authpovider';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import GoogleLogin from '../Shared/GoogleLogin/GoogleLogin';
 
 
 const SignUp = () => {
-    const {createUser} = useContext(AuthContext);
-    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const navigate = useNavigate()
 
     const onSubmit = data => {
-        createUser(data.email,data.password)
-        .then(result =>{
-                    const loggedUser = result.user;
-                    reset()
-                    Swal.fire({
-                        position: 'middle',
-                        icon: 'success',
-                        title: 'SignUp Success',
-                        showConfirmButton: false,
-                        timer: 1500
+        createUser(data.email, data.password)
+            .then(result => {
+                const loggedUser = result.user;
+                updateUserProfile(data.name, data.photo)
+                    .then(() => {
+                        const saveUser = { name: data.name, email: data.email, role: 'user' }
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        position: 'top-middle',
+                                        icon: 'success',
+                                        title: 'User created successfully.',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/login');
+                                }
+                            })
+
+
+
                     })
-                    navigate('/login')
-                })
-       
+                    .catch(error => console.log(error))
+            })
     };
-   
 
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -88,6 +107,7 @@ const SignUp = () => {
                             </div>
                         </form>
                         <p className='mt-3'>Already Have An Account ?<Link to='/login'> <span className='text-blue-700'>Please Login</span></Link></p>
+                    <GoogleLogin></GoogleLogin>
                     </div>
                 </div>
             </div>

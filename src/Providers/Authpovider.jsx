@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import {GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile} from "firebase/auth";
 import { app } from "../Firebase/firebase.confiq";
+import axios from "axios";
 
 
 export const AuthContext = createContext();
@@ -12,6 +13,9 @@ const AuthProvider = ({children}) => {
     const [user,setUser] = useState(null);
     const [loading,setLoading] = useState(true);
 
+    const googleProvider = new GoogleAuthProvider();
+
+
     const createUser = (email,password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth,email,password)
@@ -22,14 +26,38 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth,email,password)
     }
 
+    const googleSignIn = () =>{
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider);
+    }
+
     const logOut = () =>{
         setLoading(true)
         return signOut(auth)
     }
 
+    const updateUserProfile = (name, photo) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        });
+    }
+
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth,currentUser =>{
-            setUser(currentUser)          
+            setUser(currentUser) 
+            
+            if(currentUser){
+                axios.post('http://localhost:5000/jwt', {email: currentUser.email})
+                .then(data =>{
+                console.log(data.data.token)
+                    localStorage.setItem('access-token', data.token)
+                    setLoading(false);
+                })
+            }
+            else{
+                localStorage.removeItem('access-token')
+            }
+            
             setLoading(false);
         });
         return () =>{
@@ -42,7 +70,9 @@ const AuthProvider = ({children}) => {
         loading,
         createUser,
         signIn,
-        logOut
+        logOut,
+        updateUserProfile,
+        googleSignIn
     }
 
     return (

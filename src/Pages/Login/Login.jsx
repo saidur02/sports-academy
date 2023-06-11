@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/Authpovider';
 import Swal from 'sweetalert2';
+import GoogleLogin from '../Shared/GoogleLogin/GoogleLogin';
 
 const Login = () => {
 
@@ -26,7 +27,7 @@ const Login = () => {
                     icon: 'success',
                     title: 'Login Success',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1000
                 })
                 navigate(from,{replace:true})
             })
@@ -60,7 +61,7 @@ const Login = () => {
                             </div>
                         </form>
                         <p className='mt-3'>New To YoungStar?<Link to='/signup'> <span className='text-blue-700'>Please Sign Up</span></Link></p>
-
+                            <GoogleLogin></GoogleLogin>
                     </div>
                 </div>
             </div>
