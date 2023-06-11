@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
-
 const Users = () => {
     const [axiosSecure] = useAxiosSecure()
     const { data: users = [], refetch } = useQuery(['users'], async () => {
@@ -48,8 +47,7 @@ const Users = () => {
     }
 
     return (
-        <div>
-           
+        <div>   
             <div className="overflow-x-auto">
                 <table className="table">
                    
