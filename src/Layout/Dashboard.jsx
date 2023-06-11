@@ -36,10 +36,7 @@ const Dashboard = () => {
                     <li><Link to='/dashboard/enrollclass'>Enrolled Classe</Link></li>
                     </>
                   }
-                     
-                    
-                    
-                   
+                 
                     <div className="divider"></div>
                     <li><Link to='/'>Home</Link></li>
                 </ul>
