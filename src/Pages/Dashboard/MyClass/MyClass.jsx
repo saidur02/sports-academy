@@ -13,7 +13,7 @@ const MyClass = () => {
             
         })
     }
-    const url = `http://localhost:5000/dashboard/myclass`
+    const url = `https://youngstar-sports-server.vercel.app/dashboard/myclass`
 
     useEffect(() => {
        fetchClass()

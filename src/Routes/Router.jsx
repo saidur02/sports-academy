@@ -16,6 +16,7 @@ import Instructor from "../Pages/Instructor/Instructor";
 import StudentClass from "../Pages/Dashboard/StudentClass/StudentClass";
 import EnrolledClass from "../Pages/Dashboard/EnrolledClass/EnrolledClass";
 import NotFoundPage from "../Pages/NotFoundPage/NotFound";
+import PopularClass from "../Pages/Home/PopularClass/PopularClass";
 
 
 
@@ -46,6 +47,10 @@ import NotFoundPage from "../Pages/NotFoundPage/NotFound";
         {
             path:'instructors',
             element:<Instructor></Instructor>
+        },
+        {
+            path:'popularclass',
+            element:<PopularClass></PopularClass>
         }
       ]
     },

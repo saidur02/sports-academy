@@ -5,7 +5,7 @@ const Instructor = () => {
     const {user} = useContext(AuthContext)
     const [users, setUser] = useState([])
     console.log(users)
-    const url = `http://localhost:5000/users/instructors/${user?.email}`
+    const url = `https://youngstar-sports-server.vercel.app/users/instructors/${user?.email}`
 
     useEffect(() => {
         fetch(url)

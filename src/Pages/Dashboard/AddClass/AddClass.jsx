@@ -23,7 +23,7 @@ const AddClass = () => {
         price,seat,
         instructors :{ email:user?.email}
        }
-       fetch('http://localhost:5000/addclass',{
+       fetch('https://youngstar-sports-server.vercel.app/addclass',{
         method:'POST',
         headers:{
             'content-type':'application/json'

@@ -18,7 +18,7 @@ const SignUp = () => {
                 updateUserProfile(data.name, data.photo)
                     .then(() => {
                         const saveUser = { name: data.name, email: data.email, role: 'user' }
-                        fetch('http://localhost:5000/users', {
+                        fetch('https://youngstar-sports-server.vercel.app/users', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'

@@ -6,7 +6,7 @@ const AllClasses = () => {
 
     const [classes, setClasses] = useState([])
 
-    const url = `http://localhost:5000/dashboard/allclasses`
+    const url = `https://youngstar-sports-server.vercel.app/dashboard/allclasses`
 
     useEffect(() => {
         fetch(url)

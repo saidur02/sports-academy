@@ -6,7 +6,7 @@ const Classes = () => {
 
     const [classes, setClasses] = useState([])
 
-    const url = `http://localhost:5000/myClass`
+    const url = `https://youngstar-sports-server.vercel.app/myClass`
 
     useEffect(() => {
         fetch(url)

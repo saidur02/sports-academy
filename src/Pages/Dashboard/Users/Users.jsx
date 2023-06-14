@@ -11,7 +11,7 @@ const Users = () => {
     //     const res = await axiosSecure.get('/users')
     //     return res.json();
     // })
-    const url = `http://localhost:5000/users`
+    const url = `https://youngstar-sports-server.vercel.app/users`
 
     useEffect(() => {
         fetch(url)
@@ -24,7 +24,7 @@ const Users = () => {
     }, [])
 
     const handleAdmin = user =>{
-        fetch(`http://localhost:5000/users/admin/${user._id}`,{
+        fetch(`https://youngstar-sports-server.vercel.app/users/admin/${user._id}`,{
             method:'PATCH'
         })
         .then(res=>res.json())
@@ -42,7 +42,7 @@ const Users = () => {
         })
     }
     const handleInstructors = user =>{
-        fetch(`http://localhost:5000/users/instructors/${user._id}`,{
+        fetch(`https://youngstar-sports-server.vercel.app/users/instructors/${user._id}`,{
             method:'PATCH'
         })
         .then(res=>res.json())
