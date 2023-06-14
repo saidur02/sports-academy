@@ -15,6 +15,7 @@ import AllClasses from "../Pages/Dashboard/AllClasses/AllClasses";
 import Instructor from "../Pages/Instructor/Instructor";
 import StudentClass from "../Pages/Dashboard/StudentClass/StudentClass";
 import EnrolledClass from "../Pages/Dashboard/EnrolledClass/EnrolledClass";
+import NotFoundPage from "../Pages/NotFoundPage/NotFound";
 
 
 
@@ -75,6 +76,10 @@ import EnrolledClass from "../Pages/Dashboard/EnrolledClass/EnrolledClass";
             {
                 path:'enrollclass',
                 element:<EnrolledClass></EnrolledClass>
+            },
+            {
+              path: '*',
+              element:<NotFoundPage></NotFoundPage>
             }
         ]
     }
