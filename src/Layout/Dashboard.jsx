@@ -1,9 +1,12 @@
 import { Link, Outlet } from 'react-router-dom';
 import useAdmin from '../Hooks/useAdmin';
+import useInstructors from '../Hooks/useInstructors';
 
 const Dashboard = () => {
 
     const [isAdmin] = useAdmin()
+
+    const [isInstructors] = useInstructors()
 
     return (
         <div className="drawer bg-slate-300 lg:drawer-open">
@@ -23,12 +26,19 @@ const Dashboard = () => {
                     <li><Link to='/dashboard/allclasses'>Manage Classes</Link></li>
                     <li><Link to='/dashboard/users'>Manage Users</Link></li>
                     </> : <>
-                    <li><Link to='/dashboard/addclass'>Add a Class</Link></li>
+                    {
+                        isInstructors ?<>
+                        <li><Link to='/dashboard/addclass'>Add a Class</Link></li>
                     <li><Link to='/dashboard/myclass'>My Classes</Link></li>
-
-                    <li><Link to='/dashboard/studentclass'> ST My Class</Link></li>
+                        </>:<>
+                        <li><Link to='/dashboard/studentclass'> ST My Class</Link></li>
                     <li><Link to='/dashboard/enrollclass'>Enrolled Classe</Link></li>
                     </>
+                        
+                    }
+                   
+                    </>
+                    
                   }
                  
                     <div className="divider"></div>

@@ -32,7 +32,7 @@ const Classes = () => {
                     <h2 className="card-title">{singleClass.className}</h2>
                     <p>{singleClass.instructorsName}</p>
                     {user?<div className="card-actions">
-                        <button className="btn btn-primary">Buy Now</button>
+                        <button className="btn btn-primary">Enroll Now</button>
                     </div>:<h2>Please Login First</h2>}
                 </div>
             </div>

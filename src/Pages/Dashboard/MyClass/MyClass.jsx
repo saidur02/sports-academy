@@ -1,22 +1,25 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../Providers/Authpovider';
+import { getEnRolledClass } from '../../../api/EnrolledClass';
 
 const MyClass = () => {
     const { user } = useContext(AuthContext)
 
     const [classes, setClasses] = useState([])
+    const fetchClass = () => {
+        getEnRolledClass(user?.email).then(data =>{
+            console.log(data,'52')
+            setClasses(data)
+            
+        })
+    }
 
     const url = `http://localhost:5000/dashboard/myclass`
 
     useEffect(() => {
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setClasses(data)
-            })
+       fetchClass()
 
-    }, [])
+    }, [user])
     return (
         <div>
             <h2 className="uppercase">my class</h2>

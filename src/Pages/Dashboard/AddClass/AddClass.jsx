@@ -20,7 +20,8 @@ const AddClass = () => {
         instructorsName: name,
         photo,
         className,
-        price,seat
+        price,seat,
+        instructors :{ email:user?.email}
        }
        fetch('http://localhost:5000/addclass',{
         method:'POST',

@@ -50,7 +50,7 @@ import EnrolledClass from "../Pages/Dashboard/EnrolledClass/EnrolledClass";
     },
     {
         path:'dashboard',
-        element:<Dashboard></Dashboard>,
+        element:<PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
         children:[
             {
                 path:'addclass',

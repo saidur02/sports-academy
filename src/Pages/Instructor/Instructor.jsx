@@ -31,10 +31,10 @@ const Instructor = () => {
                                 
                             </tr>
                         </thead>
-                        {
+                        {/* {
                             users.map(instructor =><h2>{instructor.email}</h2>)
                         }
-                        
+                         */}
 
 
                     </table>

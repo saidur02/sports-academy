@@ -1,13 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
 
 const Users = () => {
-    const [axiosSecure] = useAxiosSecure()
-    const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await axiosSecure.get('/users')
-        return res.json();
-    })
+    const [users, setUsers] = useState([])
+    
+    // const [axiosSecure] = useAxiosSecure()
+    // const { data: users = [], refetch } = useQuery(['users'], async () => {
+    //     const res = await axiosSecure.get('/users')
+    //     return res.json();
+    // })
+    const url = `http://localhost:5000/users`
+
+    useEffect(() => {
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                setUsers(data)
+                console.log(data)
+            })
+            
+    }, [])
 
     const handleAdmin = user =>{
         fetch(`http://localhost:5000/users/admin/${user._id}`,{
@@ -62,14 +76,15 @@ const Users = () => {
                     </thead>
                     <tbody>
                        {
-                        users.map((user,index) =><tr key={user._id}>
+                       users && users.map((user,index) =><tr key={user._id}>
                             <td>{index+1}</td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
                             <td>{user.role === 'admin'? 'Admin':<button onClick={() =>handleAdmin(user)} className="btn btn-success">Admin</button>}</td>
                             <td>{user.role === 'instructors'? 'Instructor':<button onClick={() =>handleInstructors(user)} className="btn btn-success">Instructor</button>}</td>
                            
-                        </tr>)
+                        </tr>
+                        )
                        }
                         
                     </tbody>
