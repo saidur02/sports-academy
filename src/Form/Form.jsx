@@ -1,6 +1,5 @@
 import {CardElement, Elements, useElements, useStripe} from '';
 
-
 const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
