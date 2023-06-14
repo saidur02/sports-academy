@@ -13,7 +13,6 @@ const MyClass = () => {
             
         })
     }
-
     const url = `http://localhost:5000/dashboard/myclass`
 
     useEffect(() => {
